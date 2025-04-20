@@ -8,6 +8,7 @@
 .card__content {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .card__like-button {
@@ -17,6 +18,13 @@
   border: none;
   background-color: transparent;
   opacity: 40%;
+}
+
+.card__title {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  line-height: 1.2;
 }
 
 @media screen and (max-width: 627px) {

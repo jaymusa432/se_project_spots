@@ -80,3 +80,9 @@
     width: 100%;
   }
 }
+.profile__edit-button{
+ margin-top: auto; 
+ background-color: transparent;
+ border: none;
+ text-align: left;
+}
