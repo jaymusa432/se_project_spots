@@ -8,7 +8,7 @@
   
 **Intro**
   
-This project is made so all the elements are displayed correctly on popular screen sizes. We recommend investing more time in completing this project, since it's more difficult than previous ones.  
+This project is made so all the elements are displayed correctly on popular screen. On this project I used HTML, index.css, with blocks that held 6 cards, we also used header.css, page.css with vendor files and Poppin as the main font of this project.  
   
 **Figma**  
   
