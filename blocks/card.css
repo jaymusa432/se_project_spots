@@ -20,10 +20,12 @@
   border: none;
   background-color: transparent;
   opacity: 40%;
-  cursor: grab;
+  cursor: pointer;
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
+}
+.card__like-button :hover {
 }
 
 .card__title {
@@ -39,11 +41,12 @@
     height: 288px;
   }
 
-  .card__title{
+  .card__title {
     max-width: 250px;
+    font-size: 16px;
   }
 
-  .card__like-button{
+  .card__like-button {
     width: 20px;
     height: 18px;
   }

@@ -21,4 +21,4 @@ The way you'll do this at work is by exporting images directly from Figma — we
 Good luck and have fun!
 
 ## deployment
--[deployment link] (https://jeremyboddy-github.io/p3-screencast-spots/)
+-[deployment link] (https://jaymusa432.github.io/se_project_spots//)

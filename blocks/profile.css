@@ -46,11 +46,28 @@
   background-color: transparent;
   border: none;
   text-align: left;
+  align-items: baseline;
+  display: flex;
+  font-size: 16px;
+  line-height: 1;
+  font-weight: 500;
+  gap: 8px;
+  padding: 0;
 }
 
 .profile__add-button {
   margin-left: auto;
   cursor: pointer;
+  background-color: #212121;
+  width: 149px;
+  height: 52px;
+  border-radius: 8px;
+  color: #fcf5e5;
+  margin-top: auto;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center 
 }
 
 @media screen and (max-width: 627px) {
