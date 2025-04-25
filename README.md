@@ -24,4 +24,5 @@ Good luck and have fun!
 
 -[deployment link] (https://jaymusa432.github.io/se_project_spots//)
 
-[project 3 spot description](<../../OneDrive/Documents/Zoom/2025-04-25 10.21.55 Jeremy Musa Boddy's Zoom Meeting/jeremyboddy spot project.3 video.zip>)
+project 3 "spot" video decription 
+https://vimeo.com/1078743119?share=copy#t=0 
