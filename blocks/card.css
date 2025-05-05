@@ -25,7 +25,8 @@
   background-position: center;
   background-repeat: no-repeat;
 }
-.card__like-button :hover {
+.card__like-button:hover {
+  opacity: 1;
 }
 
 .card__title {
@@ -34,6 +35,12 @@
   text-overflow: ellipsis;
   line-height: 1.2;
   max-width: 350px;
+  font-weight: 500;
+  font-size: 20px;
+  letter-spacing: 0;
+  color: #212121;
+  margin: 0;
+  
 }
 
 @media screen and (max-width: 627px) {
