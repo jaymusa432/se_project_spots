@@ -56,8 +56,7 @@
   color: #2121214d;
 }
 
-
-.modal__submit-button{
-    max-width: 156px;
-    /* todo remove 156 from media qur. */
+.modal__submit-button {
+  max-width: 156px;
+  /* todo remove 156 from media qur. */
 }
