@@ -11,9 +11,9 @@ const editProfileNameInput = editProfileModal.querySelector(
 const editProfileDescriptionInput = editProfileModal.querySelector(
   "#profile-description-input"
 );
-const newPostButton = document.querySelector(".profile__new-post-button");
+const newPostButton = document.querySelector(".profile__add-button");
 const newPostmodal = document.querySelector("#new-post-modal");
-const newPostCloseButton = newPostmodal.querySelector("modal__close-button");
+const newPostCloseButton = newPostmodal.querySelector(".modal__close-button");
 
 const profileNameEl = document.querySelector(".profile__name");
 const profileDescriptionEl = document.querySelector(".profile__desription");
