@@ -15,8 +15,6 @@ const newPostButton = document.querySelector(".profile__add-button");
 const newPostModal = document.querySelector("#new-post-modal");
 const newPostCloseButton = newPostModal.querySelector(".modal__close-button");
 const newPostForm = newPostModal.querySelector(".modal__form");
-const newPostFormInput = newPostModal.querySelector("#card-image-input");
-const cardImageInput = document.querySelector("#card-image-input");
 const cardDescriptionInput = document.querySelector("#card-description-input");
 
 const profileNameEl = document.querySelector(".profile__name");
