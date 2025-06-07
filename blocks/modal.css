@@ -38,9 +38,11 @@
 
 .modal__title {
   margin: 0 0 32px;
-  font-size: 500px;
+  font-family: Poppins;
+  font-weight: 500;
+  font-size: 32px;
   line-height: 100%;
-  font-size: 500px;
+  letter-spacing: 0%;
 }
 
 .modal__form {
@@ -64,10 +66,18 @@
 }
 
 @media screen {
-  max-width:
+  max-width: ;
 }
 
 .modal__submit-button {
   max-width: 156px;
   cursor: pointer;
+  color: rgba(252, 245, 229, 1);
+  background: rgba(33, 33, 33, 1);
+  height: 52px;
+  border-radius: 8px;
+  padding-top: 18px;
+  padding-right: 32px;
+  padding-bottom: 18px;
+  padding-left: 32px;
 }
