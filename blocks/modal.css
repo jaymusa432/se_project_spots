@@ -10,7 +10,7 @@
   justify-content: center;
   align-items: center;
   padding: 10px;
-  transition: visibility 5s ease-in;
+  transition: visibility 0.5s ease-in;
 }
 
 .modal_is-opened {
@@ -34,6 +34,7 @@
   width: 40px;
   height: 40px;
   cursor: pointer;
+  opacity: 40%;
 }
 
 .modal__title {
@@ -57,7 +58,7 @@
 .modal__input {
   display: block;
   margin: 8px 0 0;
-  width: 100;
+  width: 100%;
   border-color: rgba(33, 33, 33, 0.4);
 }
 
