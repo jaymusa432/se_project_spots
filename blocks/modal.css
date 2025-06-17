@@ -10,11 +10,13 @@
   justify-content: center;
   align-items: center;
   padding: 10px;
-  transition: visibility 0.5s ease-in;
+  transition: opacity 0.3s ease-in, visibility 0.3s;
+  opacity: 0;
 }
 
 .modal_is-opened {
   visibility: visible;
+  opacity: 1;
 }
 
 .modal__container {
@@ -37,7 +39,6 @@
   opacity: 40%;
   background-color: transparent;
   border: none;
-  
 }
 .modal__close-button:hover {
   opacity: 1;
@@ -78,7 +79,8 @@
   font-weight: 500;
   font-size: 20px;
   line-height: 100%;
-  color: rgba(33,33,33,1);
+  color: rgba(33, 33, 33, 1);
+  box-sizing: border-box;
 }
 
 .modal__input::placeholder {
@@ -104,10 +106,14 @@
 }
 
 @media screen and (max-width: 627px) {
-  .modal__container{
-    padding: 12px; ;
+  .modal__container {
+    padding: 12px;
+    width: 320px;
   }
-   .modal__title{
+  .modal__title {
     font-size: 20px;
-   }
+  }
+  .modal__submit-button {
+    max-width: 500px;
+  }
 }
