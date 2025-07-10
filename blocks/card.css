@@ -1,3 +1,19 @@
+.card{
+  font-family: Poppins, Arial, Helvetica, sans-serif;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.card__delete-button {
+  background-image: url(../images/delete.svg);
+  width: 32px;
+  height: 32px;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+
 .card__image {
   height: 413px;
   width: 100%;
@@ -25,8 +41,17 @@
   background-position: center;
   background-repeat: no-repeat;
 }
+
 .card__like-button:hover {
   opacity: 1;
+}
+
+.card__like-button_active {
+  background-image: url(../images/Union\ \(1\).svg);
+  opacity: 1;
+}
+.card__like-button_active:hover {
+  opacity: 0.4;
 }
 
 .card__title {

@@ -1,34 +1,28 @@
 const initialCards = [
   {
+    name: "Golden Gate Bridge",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/7-photo-by-griffin-wooldridge-from-pexels.jpg",
+  },
+  {
     name: "Val Thorens",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/1-photo-by-moritz-feldmann-from-pexels.jpg",
   },
-];
-const initialCards = [
   {
     name: "Restaurant terrace",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/2-photo-by-ceiline-from-pexels.jpg",
   },
-];
-const initialCards = [
   {
     name: "An outdoor cafe",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/3-photo-by-tubanur-dogan-from-pexels.jpg",
   },
-];
-const initialCards = [
   {
     name: "A very long bridge, over the forest and through the trees",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/4-photo-by-maurice-laschet-from-pexels.jpg",
   },
-];
-const initialCards = [
   {
     name: "Tunnel with morning light",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/5-photo-by-van-anh-nguyen-from-pexels.jpg",
   },
-];
-const initialCards = [
   {
     name: "Mountain house",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/6-photo-by-moritz-feldmann-from-pexels.jpg",
@@ -42,7 +36,8 @@ const editProfileCloseButton = editProfileModal.querySelector(
 );
 const editProfileForm = editProfileModal.querySelector(".modal__form");
 const editProfileNameInput = editProfileModal.querySelector(
-  "#profile-name-input" );
+  "#profile-name-input"
+);
 
 const editProfileDescriptionInput = editProfileModal.querySelector(
   "#profile-description-input"
@@ -56,11 +51,48 @@ const cardImageInput = document.querySelector("#card-image-input");
 const profileNameEl = document.querySelector(".profile__name");
 const profileDescriptionEl = document.querySelector(".profile__description");
 
-function openModal (modal) {
+const previewModal = document.querySelector("#preview-modal");
+const previewModalCloseButton = previewModal.querySelector(".modal__close-button");
+const previewImageEl = previewModal.querySelector(".preview__image");
+
+
+const cardTemplate = document
+  .querySelector("#card-template")
+  .content.querySelector(".card");
+const cardsList = document.querySelector(".cards__list");
+
+function getCardElement(data) {
+  const cardElement = cardTemplate.cloneNode(true);
+  const cardTitleEl = cardElement.querySelector(".card__title");
+  const cardImageEl = cardElement.querySelector(".card__image");
+
+  cardImageEl.src = data.link;
+  cardImageEl.alt = data.name;
+  cardTitleEl.textContent = data.name;
+
+  const cardLikeButtonEl = cardElement.querySelector(".card__like-button");
+  cardLikeButtonEl.addEventListener("click", () => {
+    cardLikeButtonEl.classList.toggle("card__like-button_active");
+  });
+
+  const cardDeleteButtonEl = cardElement.querySelector(".card__delete-button");
+  cardDeleteButtonEl.addEventListener("click", () => {
+    cardElement.remove();
+  });
+
+  cardImageEl.addEventListener("click", () => {});
+    previewImageEl.src = data.link;
+    previewImageEl.alt = data.name;
+    previewModal.querySelector(".preview__title").textContent = data.name;
+
+  return cardElement;
+}
+
+function openModal(modal) {
   modal.classList.add("modal_is-opened");
 }
 
-function closeModal (modal) {
+function closeModal(modal) {
   modal.classList.remove("modal_is-opened");
 }
 
@@ -72,13 +104,16 @@ editProfileButton.addEventListener("click", function () {
   closeModal(editProfileModal);
 });
 
-addCardButton.addEventListener("click", function () {
+newPostButton.addEventListener("click", function () {
   addCardModal.classList.add("modal_is-opened");
 });
 
 editProfileCloseButton.addEventListener("click", function () {
   closeModal(editProfileModal);
 });
+
+previewModalCloseButton.addEventListener("click", function () {
+  closeModal(previewModal);
 
 newPostCloseButton.addEventListener("click", function () {
   newPostModal.classList.remove("modal_is-opened");
@@ -99,7 +134,8 @@ newPostForm.addEventListener("submit", function (event) {
   newPostModal.classList.remove("modal_is-opened");
 });
 
-initialCards.forEach(function (item) {
-  console.log(item.name);
-  console.log(item.link);
+initialCards.forEach((item) => {
+  const cardElement = getCardElement(item);
+  cardsList.append(cardElement);
 });
+}
