@@ -42,6 +42,13 @@ const editProfileNameInput = editProfileModal.querySelector(
 const editProfileDescriptionInput = editProfileModal.querySelector(
   "#profile-description-input"
 );
+
+// TOOD:
+// Create the new post modal
+// add the function to open and close modals
+// Fix the  rendered cards
+// Check console for errors
+
 const newPostButton = document.querySelector(".profile__add-button");
 const newPostModal = document.querySelector("#new-post-modal");
 const newPostCloseButton = newPostModal.querySelector(".modal__close-button");
@@ -52,9 +59,10 @@ const profileNameEl = document.querySelector(".profile__name");
 const profileDescriptionEl = document.querySelector(".profile__description");
 
 const previewModal = document.querySelector("#preview-modal");
-const previewModalCloseButton = previewModal.querySelector(".modal__close");
+const previewModalCloseButton = previewModal.querySelector(
+  ".modal__close-button"
+);
 const previewImageEl = previewModal.querySelector(".modal__image");
-
 
 const cardTemplate = document
   .querySelector("#card-template")
@@ -81,13 +89,12 @@ function getCardElement(data) {
   });
 
   cardImageEl.addEventListener("click", () => {
-
     previewImageEl.addEventListener("click", () => {
       closeModal(previewModal);
     });
     previewModalCloseButton.addEventListener("click", () => {
       closeModal(previewModal);
-  });
+    });
 
     previewImageEl.src = data.link;
     previewImageEl.alt = data.name;
@@ -108,8 +115,8 @@ editProfileButton.addEventListener("click", function () {
   editProfileNameInput.value = profileNameEl.textContent;
   editProfileDescriptionInput.value = profileDescriptionEl.textContent;
   openModal(editProfileModal);
-  editProfileModal.addEventListener("click", (event) => {
-})});
+  editProfileModal.addEventListener("click", (event) => {});
+});
 
 newPostButton.addEventListener("click", () => {
   newPostModal.classList.add("modal_is-opened");
@@ -118,7 +125,6 @@ newPostButton.addEventListener("click", () => {
 editProfileCloseButton.addEventListener("click", () => {
   closeModal(editProfileModal);
 });
-
 
 newPostCloseButton.addEventListener("click", () => {
   newPostModal.classList.remove("modal_is-opened");

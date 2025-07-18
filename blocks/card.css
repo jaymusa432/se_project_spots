@@ -1,4 +1,4 @@
-.card{
+.card {
   font-family: Poppins, Arial, Helvetica, sans-serif;
   display: flex;
   flex-direction: column;
@@ -7,11 +7,19 @@
 
 .card__delete-button {
   background-image: url(../images/delete.svg);
-  width: 32px;
-  height: 32px;
+  width: 35px;
+  height: 35px;
   position: absolute;
   top: 8px;
   right: 8px;
+  background-color: transparent;
+  border: none;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+.card__delete-button:hover {
+  background-image: url(../images/trash\ btn.svg);
 }
 
 .card__image {
@@ -47,7 +55,7 @@
 }
 
 .card__like-button_active {
-  background-image: url(../images/Union\ \(1\).svg);
+  background-image: url(../images/heartred.svg);
   opacity: 1;
 }
 .card__like-button_active:hover {
@@ -65,7 +73,6 @@
   letter-spacing: 0;
   color: #212121;
   margin: 0;
-  
 }
 
 @media screen and (max-width: 627px) {

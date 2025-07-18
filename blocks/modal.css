@@ -14,7 +14,7 @@
   opacity: 0;
 }
 
-.modal__type_preview{
+.modal__type_preview {
   padding: 0 16px;
 }
 
@@ -43,10 +43,6 @@
   opacity: 40%;
   background-color: transparent;
   border: none;
-  background-image: url(../images/trash\ btn.svg);
-  background-repeat: no-repeat
-  background-position: center;
-  background-size: 15x 15px;
 }
 
 .modal__close_type_preview {
@@ -158,16 +154,15 @@
 }
 
 @media screen and (max-width: 627px) {
-  .modal__close_type_preview{
+  .modal__close_type_preview {
     top: -48px;
     right: 0;
   }
 }
 
-.modal__image{
+.modal__image {
   max-width: unset;
 }
-
 
 @media screen and (max-width: 627px) {
   .modal__container {
