@@ -33,6 +33,10 @@
   position: relative;
 }
 
+.modal__content {
+  position: relative;
+}
+
 .modal__close-button {
   position: absolute;
   top: 32px;
@@ -43,13 +47,15 @@
   opacity: 40%;
   background-color: transparent;
   border: none;
+  background-image: url(../images/xlogo.svg);
 }
 
 .modal__close_type_preview {
-  top: 0;
-  right: -52.5px;
+  position: absolute;
+  top: -40px;
+  right: 0;
   background-color: transparent;
-  background-image: url(../images/delete.svg);
+  /*background-image: url(../images/delete.svg);*/
 }
 
 .modal__close-button:hover {

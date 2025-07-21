@@ -93,22 +93,22 @@
           </button>
           <p class="modal__title">New Post</p>
           <form class="modal__form">
-            <label for="profile-name-input" class="modal__label">
-              Name
+            <label for="Image Link" class="modal__label">
+              Image Link
               <input
-                id="profile-name-input"
-                type="text"
+                id="new-post-image"
+                type="url"
                 class="modal__input"
-                placeholder="Type your name"
+                placeholder="Paste a link to the picture"
               />
             </label>
-            <label for="profile-description-input" class="modal__label">
-              Description
+            <label for="new-post-caption" class="modal__label">
+              Caption
               <input
-                id="profile-description-input"
+                id="card-description-input"
                 type="text"
                 class="modal__input"
-                placeholder="Describe yourself"
+                placeholder="Type your caption"
               />
             </label>
             <button type="submit" class="modal__submit-button">Save</button>
@@ -120,7 +120,7 @@
         <div class="modal__content">
           <button
             aria-label="Close modal"
-            class="modal__close-button"
+            class="modal__close-button modal__close_type_preview"
             type="button"
           ></button>
           <img
