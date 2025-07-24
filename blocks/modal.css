@@ -14,7 +14,7 @@
   opacity: 0;
 }
 
-.modal__type_preview {
+.modal_type_preview {
   padding: 0 16px;
 }
 
@@ -47,7 +47,7 @@
   opacity: 40%;
   background-color: transparent;
   border: none;
-  background-image: url(../images/xlogo.svg);
+  /* background-image: url(../images/xlogo.svg);*/
 }
 
 .modal__close_type_preview {
@@ -55,7 +55,18 @@
   top: -40px;
   right: 0;
   background-color: transparent;
-  /*background-image: url(../images/delete.svg);*/
+  background-image: url(../images/closewhite.svg);
+}
+
+.modal__close_type_preview:hover {
+  opacity: 40%;
+  font-family: Poppins;
+  font-weight: 500;
+  font-style: medium;
+  size: 20px;
+  line-height: 120%;
+  letter-spacing: 0%;
+  background: rgba(255, 255, 255, 1);
 }
 
 .modal__close-button:hover {

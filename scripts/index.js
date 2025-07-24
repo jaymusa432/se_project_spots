@@ -109,7 +109,6 @@ editProfileButton.addEventListener("click", function () {
   editProfileNameInput.value = profileNameEl.textContent;
   editProfileDescriptionInput.value = profileDescriptionEl.textContent;
   openModal(editProfileModal);
-  editProfileModal.addEventListener("click", (event) => {});
 });
 
 newPostButton.addEventListener("click", () => {
