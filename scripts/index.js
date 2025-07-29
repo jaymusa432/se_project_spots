@@ -145,7 +145,7 @@ newPostForm.addEventListener("submit", function (event) {
 
   cardsList.prepend(cardElement);
 
-  closeModal(newPostModal);
+  newPostModal(editProfileModal);
   newPostForm.reset();
 });
 
