@@ -134,6 +134,28 @@ function handleEditProfileSubmit(event) {
   closeModal(editProfileModal);
 }
 
+function handleCardSubmit(event) {
+  event.preventDefault();
+  const values = { name: captionInput.value, link:linkInput.value };
+  const cardElement = getCardElement(values);
+  cardsList.prepend(cardElement);
+  event.target.reset();
+  disabledButton(cardSubmitButton);
+  closeModal(cardModal);
+}
+
+function handDeleteCard(event) {
+  event.target.closest("card") .remove();
+}
+
+function handleLike(event) {
+  event.target.classList.toggle("card__like-button_active");
+}
+
+function handleImageClick(data) {
+  previewImageEl.src = data.link;
+}
+
 editProfileForm.addEventListener("submit", handleEditProfileSubmit);
 newPostForm.addEventListener("submit", function (event) {
   event.preventDefault();
