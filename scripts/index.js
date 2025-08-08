@@ -136,7 +136,7 @@ function handleEditProfileSubmit(event) {
 
 function handleCardSubmit(event) {
   event.preventDefault();
-  const values = { name: captionInput.value, link:linkInput.value };
+  const values = { name: cardDescriptionInput.value, link: cardImageInput.value };
   const cardElement = getCardElement(values);
   cardsList.prepend(cardElement);
   event.target.reset();

@@ -1,54 +1,61 @@
 const settings = {
   formSelector: ".modal__form",
   inputSelector: ".modal__input",
-  submitButtonSelector: ".modal__button",
-  inactiveButtonClass: "modal__button_disabled",
+  submitButtonSelector: ".modal__submit-button",
+  inactiveButtonClass: "modal__submit-button_disabled",
   inputErrorClass: "modal__input_type_error",
   errorClass: "modal__error_visible",
 };
 
-const showInputError = (formElement, inputElement, errorMessageElement) => {
+const showInputError = (formElement, inputElement, errorMessage, config) => {
   const errorMessageElement = formElement.querySelector(
     `#${inputElement.id}-error`
   );
   errorMessageElement.textContent = errorMessage;
-  inputElement.classlist.add("modal__input_type_error");
+  inputElement.classList.add(config.inputErrorClass);
 };
 
-const hideInputError = (formElement, inputElement, errorMessageElement) => {
+const hideInputError = (formElement, inputElement, config) => {
   const errorMessageElement = formElement.querySelector(
     `#${inputElement.id}-error`
   );
-  errorMessage.textContent = "";
-  inputElement.classlist.remove("modal__input_type_error");
+  errorMessageElement.textContent = "";
+  inputElement.classList.remove(config.inputErrorClass);
 };
 
-const checkInputValidity = (formElement, inputElement) => {
+const checkInputValidity = (formElement, inputElement, config) => {
   if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage);
+    showInputError(
+      formElement,
+      inputElement,
+      inputElement.validationMessage,
+      config
+    );
   } else {
-    hideInputError(formElement, inputElement);
+    hideInputError(formElement, inputElement, config);
   }
 };
 
-const hasInvalidInput = () => {
+const hasInvalidInput = (inputList) => {
   return inputList.some((input) => {
     return !input.validity.valid;
   });
 };
 
-const toggleButtonState = (inputList, buttonElement) => {
+const toggleButtonState = (inputList, buttonElement, config) => {
   if (hasInvalidInput(inputList)) {
-    disabledButton(buttonElement);
+    disabledButton(buttonElement, config);
     //add modifier class to button to make it gray //dnt forget css
   } else {
     buttonElement.disabled = false;
+    buttonElement.classList.remove(config.inactiveButtonClass);
     //remove disabled class
   }
 };
 
-const disabledButton = (buttonElement) => {
+const disabledButton = (buttonElement, config) => {
   buttonElement.disabled = true;
+  buttonElement.classList.add(config.inactiveButtonClass);
 };
 
 const resetValidation = (formElement, inputList) => {
@@ -74,9 +81,9 @@ const setEventListeners = (formElement, config) => {
 };
 
 const enableValidation = (config) => {
-  const formList = document.querySelectorAll(config.formSelector);
+  const formList = Array.from(document.querySelectorAll(config.formSelector));
   formList.forEach((formEl) => {
-    setEventListeners();
+    setEventListeners(formEl, config);
   });
 };
 
