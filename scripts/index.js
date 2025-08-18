@@ -96,13 +96,22 @@ function getCardElement(data) {
   });
   return cardElement;
 }
+function handleEscapeKey(event) {
+  if (event.key === "Escape") {
+    const openedModal = document.querySelector(".modal_is-opened");
+    closeModal(openedModal);
+  }
+  // What function should you call?
+}
 
 function openModal(modal) {
   modal.classList.add("modal_is-opened");
+  document.addEventListener("keyup", handleEscapeKey);
 }
 
 function closeModal(modal) {
   modal.classList.remove("modal_is-opened");
+  document.removeEventListener("keyup", handleEscapeKey);
 }
 
 editProfileButton.addEventListener("click", function () {
@@ -136,7 +145,10 @@ function handleEditProfileSubmit(event) {
 
 function handleCardSubmit(event) {
   event.preventDefault();
-  const values = { name: cardDescriptionInput.value, link: cardImageInput.value };
+  const values = {
+    name: cardDescriptionInput.value,
+    link: cardImageInput.value,
+  };
   const cardElement = getCardElement(values);
   cardsList.prepend(cardElement);
   event.target.reset();
@@ -145,7 +157,7 @@ function handleCardSubmit(event) {
 }
 
 function handDeleteCard(event) {
-  event.target.closest("card") .remove();
+  event.target.closest("card").remove();
 }
 
 function handleLike(event) {
@@ -164,6 +176,18 @@ newPostForm.addEventListener("submit", function (event) {
     name: cardDescriptionInput.value,
     link: cardImageInput.value,
   });
+
+  function openModal(modal) {
+    // Show modal
+    // Add escape listener HERE
+  }
+
+  function closeModal(modal) {
+    // Hide modal
+    // Remove escape listener HERE
+  }
+
+  function resetValidation() {}
 
   cardsList.prepend(cardElement);
 
