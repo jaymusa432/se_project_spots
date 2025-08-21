@@ -60,12 +60,11 @@
 
 .modal__close-button_type_preview:hover {
   opacity: 40%;
-  font-family: Poppins;
+  font-family: Poppins, Arial, Helvetica, sans-serif;
   font-weight: 500;
   font-style: normal;
    font-size: 20px;
   line-height: 120%;
-  letter-spacing: 0%;
 }
 
 .modal__close-button:hover {
@@ -74,7 +73,7 @@
 
 .modal__title {
   margin: 0 0 32px;
-  font-family: Poppins;
+  font-family: Poppins Arial, Helvetica, sans-serif;
   font-weight: 500;
   font-size: 32px;
   line-height: 100%;
@@ -89,11 +88,10 @@
 .modal__label {
   margin: 0 0 32px;
   color: rgba(33, 33, 33, 0.7);
-  font-family: Poppins;
+  font-family: Poppins Arial, Helvetica, sans-serif;
   font-weight: 500;
   font-size: 16px;
   line-height: 1.1;
-  letter-spacing: 0%;
   display: block;
 }
 
