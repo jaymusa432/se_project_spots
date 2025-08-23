@@ -158,6 +158,10 @@ newPostForm.addEventListener("submit", function (event) {
 
   const modals = document.querySelectorAll(".modal");
 
+  });
+});
+
+
 modals.forEach((modal) => {
   modal.addEventListener("mousedown", (evt) => {
     if (
@@ -165,8 +169,6 @@ modals.forEach((modal) => {
     ) {
       closeModal(modal);
     }
-  });
-});
 
   cardsList.prepend(cardElement);
 
