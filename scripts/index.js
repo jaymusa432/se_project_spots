@@ -156,12 +156,14 @@ newPostForm.addEventListener("submit", function (event) {
     link: cardImageInput.value,
   });
 
-  const modals = document.querySelectorAll(".modal");
+  cardsList.prepend(cardElement);
 
-  });
+  closeModal(newPostModal);
+  newPostForm.reset();
+  disabledButton(event.submitter, settings);
 });
 
-
+const modals = document.querySelectorAll(".modal");
 modals.forEach((modal) => {
   modal.addEventListener("mousedown", (evt) => {
     if (
@@ -169,11 +171,7 @@ modals.forEach((modal) => {
     ) {
       closeModal(modal);
     }
-
-  cardsList.prepend(cardElement);
-
-  closeModal(newPostModal);
-  newPostForm.reset();
+  });
 });
 
 initialCards.forEach((item) => {
