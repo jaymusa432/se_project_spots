@@ -19,7 +19,7 @@
 }
 
 .card__delete-button:hover {
-  background-image: url(../images/trash\ btn.svg);
+  background-image: url(../images/trash-btn.svg);
 }
 
 .card__image {
