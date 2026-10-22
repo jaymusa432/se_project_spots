@@ -17,11 +17,14 @@ const api = new Api({
 
 api
   .getAppInfo()
-  .then(([cards]) => {
+  .then(([cards, userInfo]) => {
     cards.forEach((item) => {
       const cardElement = getCardElement(item);
       cardsList.append(cardElement);
     });
+    profileNameEl.textContent= userInfo.name
+    profileDescriptionEl.textContent= userInfo.about
+    profileAvatar.src = userInfo.avatar 
   })
   .catch(console.error);
 
@@ -45,7 +48,7 @@ const editProfileDescriptionInput = editProfileModal.querySelector(
 // add the function to open and close modals
 // Fix the  rendered cards
 // Check console for errors
-
+const profileAvatar = document.querySelector(".profile__avatar")
 const newPostButton = document.querySelector(".profile__add-button");
 const newPostModal = document.querySelector("#new-post-modal");
 const newPostCloseButton = newPostModal.querySelector(".modal__close-button");
@@ -54,7 +57,7 @@ const cardDescriptionInput = document.querySelector("#card-description-input");
 const cardImageInput = document.querySelector("#new-post-image");
 const profileNameEl = document.querySelector(".profile__name");
 const profileDescriptionEl = document.querySelector(".profile__description");
-
+const confirmDeleteModal = document.querySelector("#card-delete-modal");
 const previewModal = document.querySelector("#preview-modal");
 const previewModalCloseButton = previewModal.querySelector(
   ".modal__close-button",
@@ -82,7 +85,7 @@ function getCardElement(data) {
 
   const cardDeleteButtonEl = cardElement.querySelector(".card__delete-button");
   cardDeleteButtonEl.addEventListener("click", () => {
-    cardElement.remove();
+    openModal(confirmDeleteModal);
   });
 
   cardImageEl.addEventListener("click", () => {
@@ -91,6 +94,10 @@ function getCardElement(data) {
     previewModal.querySelector(".modal__caption").textContent = data.name;
     openModal(previewModal);
   });
+  if (data.isLiked) {
+    cardLikeButtonEl.classList.add("card__like-button_active");
+  }
+
   return cardElement;
 }
 function handleEscapeKey(event) {
@@ -142,33 +149,50 @@ previewModalCloseButton.addEventListener("click", () => {
 
 function handleEditProfileSubmit(event) {
   event.preventDefault();
+  const submitButton = event.submitter;
+  submitButton.textContent = "Saving...";
   api
     .editUserInfo({
-      name: "profileNameEl.value",
-      about: "profileDescriptionEl.value",
+      name: editProfileNameInput.value,
+      about: editProfileDescriptionInput.value,
     })
     .then((data) => {
-      profileNameEl.textContent = editProfileNameInput.value;
-      profileDescriptionEl.textContent = editProfileDescriptionInput.value;
+      profileNameEl.textContent = data.name;
+      profileDescriptionEl.textContent = data.about;
       closeModal(editProfileModal);
     })
-    .catch(console.error);
+    .catch(console.error)
+    .finally(() => {
+      submitButton.textContent = "Save";
+    });
 }
 
 editProfileForm.addEventListener("submit", handleEditProfileSubmit);
 newPostForm.addEventListener("submit", function (event) {
   event.preventDefault();
+  const submitButton = event.submitter;
+  submitButton.textContent = "Saving...";
+  api
+    .addNewCard({
+      name: cardDescriptionInput.value,
+      link: cardImageInput.value,
+    })
+    .then((data) => {
+      const cardElement = getCardElement({
+        name: cardDescriptionInput.value,
+        link: cardImageInput.value,
+      });
 
-  const cardElement = getCardElement({
-    name: cardDescriptionInput.value,
-    link: cardImageInput.value,
-  });
+      cardsList.prepend(cardElement);
 
-  cardsList.prepend(cardElement);
-
-  closeModal(newPostModal);
-  newPostForm.reset();
-  disabledButton(event.submitter, settings);
+      closeModal(newPostModal);
+      newPostForm.reset();
+      disabledButton(event.submitter, settings);
+    })
+    .catch(console.error)
+    .finally(() => {
+      submitButton.textContent = "Save";
+    });
 });
 
 const modals = document.querySelectorAll(".modal");
