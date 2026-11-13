@@ -191,7 +191,7 @@
   pointer-events: none;
 }
 
-.modal__delete-buttons{
+.modal__delete-form{
   display: flex;
   justify-content: center;
    font-family: Poppins, Arial, Helvetica, sans-serif;

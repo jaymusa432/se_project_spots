@@ -22,13 +22,12 @@ api
       const cardElement = getCardElement(item);
       cardsList.append(cardElement);
     });
-    profileNameEl.textContent= userInfo.name
-    profileDescriptionEl.textContent= userInfo.about
-    profileAvatar.src = userInfo.avatar 
+    profileNameEl.textContent = userInfo.name;
+    profileDescriptionEl.textContent = userInfo.about;
+    profileAvatar.src = userInfo.avatar;
   })
   .catch(console.error);
 
-//4bf45365-5b6b-46b5-9093-3c0f23b8b06e
 const editProfileButton = document.querySelector(".profile__edit-button");
 const editProfileModal = document.querySelector("#edit-profile-modal");
 const editProfileCloseButton = editProfileModal.querySelector(
@@ -43,12 +42,18 @@ const editProfileDescriptionInput = editProfileModal.querySelector(
   "#profile-description-input",
 );
 
-// TOOD:
-// Create the new post modal
-// add the function to open and close modals
-// Fix the  rendered cards
-// Check console for errors
-const profileAvatar = document.querySelector(".profile__avatar")
+const editProfileAvatarBtn = document.querySelector(".profile__avatar-btn");
+const editProfileAvatarModal = document.querySelector("#edit-profile-avatar");
+const editProfileAvatarForm =
+  editProfileAvatarModal.querySelector(".modal__form");
+const editProfileAvatarInput = editProfileAvatarModal.querySelector(
+  "#profile-avatar-input",
+);
+const editProfileAvatarCloseButton = editProfileAvatarModal.querySelector(
+  ".modal__close-button",
+);
+
+const profileAvatar = document.querySelector(".profile__avatar");
 const newPostButton = document.querySelector(".profile__add-button");
 const newPostModal = document.querySelector("#new-post-modal");
 const newPostCloseButton = newPostModal.querySelector(".modal__close-button");
@@ -62,13 +67,19 @@ const previewModal = document.querySelector("#preview-modal");
 const previewModalCloseButton = previewModal.querySelector(
   ".modal__close-button",
 );
+const deleteForm = confirmDeleteModal.querySelector(".modal__delete-form");
+const confirmDeleteCloseButton = confirmDeleteModal.querySelector(
+  ".modal__close-button",
+);
 const previewImageEl = previewModal.querySelector(".modal__image");
-
+const modalCancelButton = confirmDeleteModal.querySelector(
+  ".modal__cancel-button",
+);
 const cardTemplate = document
   .querySelector("#card-template")
   .content.querySelector(".card");
 const cardsList = document.querySelector(".cards__list");
-
+let selectedCardId, selectedCard;
 function getCardElement(data) {
   const cardElement = cardTemplate.cloneNode(true);
   const cardTitleEl = cardElement.querySelector(".card__title");
@@ -80,11 +91,22 @@ function getCardElement(data) {
 
   const cardLikeButtonEl = cardElement.querySelector(".card__like-button");
   cardLikeButtonEl.addEventListener("click", () => {
-    cardLikeButtonEl.classList.toggle("card__like-button_active");
+    api
+      .changeLikeStatus(data._id, data.isLiked)
+      .then((updatedCard) => {
+        cardLikeButtonEl.classList.toggle(
+          "card__like-button_active",
+          updatedCard.isLiked,
+        );
+        data.isLiked = updatedCard.isLiked;
+      })
+      .catch(console.error);
   });
 
   const cardDeleteButtonEl = cardElement.querySelector(".card__delete-button");
   cardDeleteButtonEl.addEventListener("click", () => {
+    selectedCard = cardElement;
+    selectedCardId = data._id;
     openModal(confirmDeleteModal);
   });
 
@@ -105,7 +127,6 @@ function handleEscapeKey(event) {
     const openedModal = document.querySelector(".modal_is-opened");
     closeModal(openedModal);
   }
-  // What function should you call?
 }
 
 function openModal(modal) {
@@ -135,8 +156,24 @@ newPostButton.addEventListener("click", () => {
   openModal(newPostModal);
 });
 
+editProfileAvatarBtn.addEventListener("click", () => {
+  openModal(editProfileAvatarModal);
+});
+
+editProfileAvatarCloseButton.addEventListener("click", () => {
+  closeModal(editProfileAvatarModal);
+});
+
 editProfileCloseButton.addEventListener("click", () => {
   closeModal(editProfileModal);
+});
+
+confirmDeleteCloseButton.addEventListener("click", () => {
+  closeModal(confirmDeleteModal);
+});
+
+modalCancelButton.addEventListener("click", () => {
+  closeModal(confirmDeleteModal);
 });
 
 newPostCloseButton.addEventListener("click", () => {
@@ -167,7 +204,46 @@ function handleEditProfileSubmit(event) {
     });
 }
 
+function handleEditAvatarSubmit(event) {
+  event.preventDefault();
+  const submitButton = event.submitter;
+  submitButton.textContent = "Saving...";
+
+  api
+    .changeAvatar({ avatar: editProfileAvatarInput.value })
+    .then((data) => {
+      profileAvatar.src = data.avatar;
+      closeModal(editProfileAvatarModal);
+      editProfileAvatarForm.reset();
+      disabledButton(submitButton, settings);
+    })
+    .catch(console.error)
+    .finally(() => {
+      submitButton.textContent = "Save";
+    });
+}
+
+function deleteButtonSubmit(event) {
+  event.preventDefault();
+  const deleteButton = event.submitter;
+  deleteButton.textContent = "Deleting...";
+  api
+    .deleteCard(selectedCardId)
+    .then(() => {
+      selectedCard.remove();
+      selectedCardId = null;
+      selectedCard = null;
+      closeModal(confirmDeleteModal);
+    })
+    .catch(console.error)
+    .finally(() => {
+      deleteButton.textContent = "Delete";
+    });
+}
+
+deleteForm.addEventListener("submit", deleteButtonSubmit);
 editProfileForm.addEventListener("submit", handleEditProfileSubmit);
+editProfileAvatarForm.addEventListener("submit", handleEditAvatarSubmit);
 newPostForm.addEventListener("submit", function (event) {
   event.preventDefault();
   const submitButton = event.submitter;
@@ -178,12 +254,7 @@ newPostForm.addEventListener("submit", function (event) {
       link: cardImageInput.value,
     })
     .then((data) => {
-      const cardElement = getCardElement({
-        name: cardDescriptionInput.value,
-        link: cardImageInput.value,
-      });
-
-      cardsList.prepend(cardElement);
+      cardsList.prepend(getCardElement(data));
 
       closeModal(newPostModal);
       newPostForm.reset();

@@ -21,13 +21,21 @@
       </header>
       <main class="content">
         <section class="profile page__section">
-          <button class="profile__avatar-btn">
-            <img
-              src="<%=require('./images/avatar.jpg')%>"
-              alt="Bessie Coleman"
-              class="profile__avatar"
-            />
-          </button>
+         <div class="profile__avatar-container">
+          <img
+          src="<%=require('./images/avatar.jpg')%>"
+          alt="Bessie Coleman"
+          class="profile__avatar"
+          />
+          <button type="button" class="profile__avatar-btn">
+            <img 
+             src="<%=require('./images/pencil-lite.png')%>"
+          alt="edit-icon"
+          class=""
+          />
+          Edit Avatar 
+        </button>
+        </div>
           <div class="profile__column">
             <h1 class="profile__name">Bessie Coleman</h1>
             <p class="profile__description">Civil Aviator</p>
@@ -102,6 +110,32 @@
         </div>
       </div>
 
+       <div class="modal" id="edit-profile-avatar">
+        <div class="modal__container">
+          <button type="button" class="modal__close-button">
+            <img src="<%=require('./images/xlogo.svg')%>" alt="close button" />
+          </button>
+          <h2 class="modal__title">Edit profile avatar</h2>
+          <form class="modal__form">
+            <label for="profile-avatar-input" class="modal__label">
+              Profile Picture
+              <input
+                id="profile-avatar-input"
+                type="url"
+                class="modal__input"
+                placeholder="Paste the link to an image"
+                minlength="2"
+                required
+              />
+              <span id="profile-avatar-input-error" class="modal__error"></span>
+            </label>
+  
+            <button type="submit" class="modal__submit-button">Save</button>
+          </form>
+        </div>
+      </div>
+
+
       <div class="modal" id="new-post-modal">
         <div class="modal__container">
           <button type="button" class="modal__close-button">
@@ -161,15 +195,15 @@
           <img src="<%=require('./images/xlogo.svg')%>" alt="close button" />
         </button>
         <p class="modal__title">Are you sure you want to delete this image?</p>
-        <div class="modal__delete-buttons">
+        <form class="modal__delete-form">
           <button
             type="submit"
             class="modal__submit-button modal__delete-button"
           >
             Delete
           </button>
-          <button type="submit" class="modal__submit-button">Cancel</button>
-        </div>
+          <button type="button" class="modal__cancel-button">Cancel</button>
+        </form>
       </div>
     </div>
   </body>

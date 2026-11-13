@@ -4,6 +4,28 @@
   border-bottom: 1px rgba(33, 33, 33, 0.4) solid;
 }
 
+.profile__avatar-container {
+  position: relative;
+}
+
+.profile__avatar-btn {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: #000000;
+  border: none;
+  color: #fff;
+  visibility: hidden;
+  cursor: pointer;
+  width: 190px;
+  height: 190px;
+  opacity: 0.5;
+}
+
+.profile__avatar-container:hover .profile__avatar-btn {
+  visibility: visible;
+}
+
 .profile__avatar {
   height: 190px;
   width: 190px;
@@ -55,6 +77,7 @@
   padding: 0;
   opacity: 0.7;
   color: #212121;
+  cursor: pointer;
 }
 .profile__edit-button:hover {
   opacity: 1;
@@ -77,8 +100,8 @@
   border: none;
 }
 
-.profile__add-button:hover{
-  background-color: rgba(33, 33,33, 0.8);
+.profile__add-button:hover {
+  background-color: rgba(33, 33, 33, 0.8);
 }
 
 @media screen and (max-width: 627px) {
