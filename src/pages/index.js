@@ -6,6 +6,7 @@ import {
   settings,
 } from "../scripts/validation";
 import Api from "../utils/Api.js";
+import { handleSubmit, renderLoading } from "../scripts/utils.js";
 
 const api = new Api({
   baseUrl: "https://around-api.en.tripleten-services.com/v1",
@@ -184,86 +185,76 @@ previewModalCloseButton.addEventListener("click", () => {
   closeModal(previewModal);
 });
 
-function handleEditProfileSubmit(event) {
-  event.preventDefault();
+
+
+deleteForm.addEventListener("submit", (event) => {
+  handleSubmit(
+    () =>
+      api.deleteCard(selectedCardId).then(() => {
+        selectedCard.remove();
+        selectedCardId = null;
+        selectedCard = null;
+        closeModal(confirmDeleteModal);
+      }),
+    event,
+    "Deleting...",
+  );
+});
+
+editProfileForm.addEventListener("submit", (event) => {
+  handleSubmit(
+    () =>
+      api
+        .editUserInfo({
+          name: editProfileNameInput.value,
+          about: editProfileDescriptionInput.value,
+        })
+        .then((data) => {
+          profileNameEl.textContent = data.name;
+          profileDescriptionEl.textContent = data.about;
+          closeModal(editProfileModal);
+        }),
+    event,
+    "Saving...",
+  );
+});
+
+editProfileAvatarForm.addEventListener("submit", (event) => {
   const submitButton = event.submitter;
-  submitButton.textContent = "Saving...";
-  api
-    .editUserInfo({
-      name: editProfileNameInput.value,
-      about: editProfileDescriptionInput.value,
-    })
-    .then((data) => {
-      profileNameEl.textContent = data.name;
-      profileDescriptionEl.textContent = data.about;
-      closeModal(editProfileModal);
-    })
-    .catch(console.error)
-    .finally(() => {
-      submitButton.textContent = "Save";
-    });
-}
 
-function handleEditAvatarSubmit(event) {
-  event.preventDefault();
+  handleSubmit(
+    () =>
+      api
+        .changeAvatar({ avatar: editProfileAvatarInput.value })
+        .then((data) => {
+          profileAvatar.src = data.avatar;
+          closeModal(editProfileAvatarModal);
+          editProfileAvatarForm.reset();
+          disabledButton(submitButton, settings);
+        }),
+    event,
+    "Saving...",
+  );
+});
+
+newPostForm.addEventListener("submit", (event) => {
   const submitButton = event.submitter;
-  submitButton.textContent = "Saving...";
 
-  api
-    .changeAvatar({ avatar: editProfileAvatarInput.value })
-    .then((data) => {
-      profileAvatar.src = data.avatar;
-      closeModal(editProfileAvatarModal);
-      editProfileAvatarForm.reset();
-      disabledButton(submitButton, settings);
-    })
-    .catch(console.error)
-    .finally(() => {
-      submitButton.textContent = "Save";
-    });
-}
-
-function deleteButtonSubmit(event) {
-  event.preventDefault();
-  const deleteButton = event.submitter;
-  deleteButton.textContent = "Deleting...";
-  api
-    .deleteCard(selectedCardId)
-    .then(() => {
-      selectedCard.remove();
-      selectedCardId = null;
-      selectedCard = null;
-      closeModal(confirmDeleteModal);
-    })
-    .catch(console.error)
-    .finally(() => {
-      deleteButton.textContent = "Delete";
-    });
-}
-
-deleteForm.addEventListener("submit", deleteButtonSubmit);
-editProfileForm.addEventListener("submit", handleEditProfileSubmit);
-editProfileAvatarForm.addEventListener("submit", handleEditAvatarSubmit);
-newPostForm.addEventListener("submit", function (event) {
-  event.preventDefault();
-  const submitButton = event.submitter;
-  submitButton.textContent = "Saving...";
-  api
-    .addNewCard({
-      name: cardDescriptionInput.value,
-      link: cardImageInput.value,
-    })
-    .then((data) => {
-      cardsList.prepend(getCardElement(data));
-
-      closeModal(newPostModal);
-      newPostForm.reset();
-      disabledButton(event.submitter, settings);
-    })
-    .catch(console.error)
-    .finally(() => {
-      submitButton.textContent = "Save";
-    });
+  handleSubmit(
+    () =>
+      api
+        .addNewCard({
+          name: cardDescriptionInput.value,
+          link: cardImageInput.value,
+        })
+        .then((data) => {
+          cardsList.prepend(getCardElement(data));
+          closeModal(newPostModal);
+          disabledButton(submitButton, settings);
+        }),
+    event,
+    "Saving...",
+  );
 });
 
 const modals = document.querySelectorAll(".modal");

@@ -45,17 +45,15 @@
   height: 40px;
   cursor: pointer;
   opacity: 40%;
-  background-color: transparent;
   border: none;
-  /* background-image: url(../images/xlogo.svg);*/
+  background: rgba(0, 0, 0, 0) url(../images/xlogo.svg) center / contain no-repeat;
 }
 
 .modal__close-button_type_preview {
   position: absolute;
   top: -40px;
   right: 0;
-  background-color: transparent;
-  background-image: url(../images/closewhite.svg);
+  background: rgba(0, 0, 0, 0) url(../images/closewhite.svg) center / contain no-repeat;
 }
 
 .modal__close-button_type_preview:hover {
@@ -191,15 +189,11 @@
   pointer-events: none;
 }
 
-.modal__delete-form{
+.modal__delete-form {
   display: flex;
-  justify-content: center;
-   font-family: Poppins, Arial, Helvetica, sans-serif;
-}
-
-.modal__delete-button{
-  background-color: #ff6565;
- color: #212121;
+  flex-direction: column;
+  gap: 12px;
+  font-family: Poppins, Arial, Helvetica, sans-serif;
 }
 
 @media screen and (max-width: 627px) {
@@ -209,21 +203,35 @@
   }
 }
 
-.modal__image {
-  max-width: unset;
-}
-
 @media screen and (max-width: 627px) {
   .modal__container {
-    padding: 12px;
-    width: 320px;
-    font-size: 16px;
-    position: absolute;
+    padding: 22px 12px 12px;
   }
+
   .modal__title {
+    font-size: 20px;
+    margin-top: 10px;
+    margin-left: 5px;
+  }
+
+  .modal__submit-button {
+    width: 100%;
+    max-width: unset;
     font-size: 16px;
   }
-  .modal__submit-button {
-    max-width: 500px;
+
+  .modal__close-button {
+    top: 10px;
+    right: 10px;
+  }
+
+  .modal__delete-form {
+    padding: 18px 32px;
+  }
+
+  .modal__image {
+    max-width: unset;
+    width: 288px;
+    border-radius: 4px;
   }
 }
